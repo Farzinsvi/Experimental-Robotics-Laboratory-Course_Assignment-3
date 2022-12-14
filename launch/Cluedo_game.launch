@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+<node pkg="erl_assignment3" type="AnnounceHypotesis.py" name="announcement" output="screen"/>
+<node pkg="erl_assignment3" type="ArmorInterface.py" name="armor_interface" output="screen"/>
+<node pkg="erl_assignment3" type="FSM.py" name="reasonong" output="screen"/>
+</launch>

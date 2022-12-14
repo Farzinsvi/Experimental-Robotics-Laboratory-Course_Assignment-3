@@ -1,0 +1,8 @@
+int32 mode
+int32 ID
+string key
+string value
+---
+int32 mode
+int32 ID
+bool success

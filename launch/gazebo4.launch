@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="model" default="$(find erl_assignment3)/urdf/sherlock_robot.xacro" />
+
+  <!-- We resume the logic in empty_world.launch 
+   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
+    <arg name="paused" value="true"/>
+  </include>-->
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" 
+	 command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <rosparam file="$(find erl_assignment3)/config/gamesession.yaml" command="load" />	 
+  <!-- Start Rviz -->  
+   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node>
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find erl_assignment3)/config/sim_nocamera.rviz" />
+  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_urdf)/urdf.rviz" />-->
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model robot1 -param robot_description -x 0 -y -1 -z 0.05"/> 
+
+
+   <node name="aruco_reader" pkg ="aruco_ros_assignment" type="aruco_reader" output="screen" /> 
+   <node name="final_oracle" pkg ="erl_assignment3" type="final_oracle" output="screen" /> 
+   <node pkg="erl_assignment3" type="AnnounceHypotesis.py" name="announcement" output="screen"/>
+   <node pkg="erl_assignment3" type="ArmorInterface.py" name="armor_interface" output="screen"/>
+   <node pkg="motion_plan" type="go_to_point_action.py" name="reach" output="screen"/>
+  <include file="$(find planning)/launch/gmapping.launch"/>
+  <include file="$(find planning)/launch/move_base.launch"/> 
+
+</launch>
