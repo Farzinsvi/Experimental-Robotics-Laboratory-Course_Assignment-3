@@ -1,1 +1,1 @@
-# erl_assignment3
+# Experimental Robotics Laboratory - Assignment3
