@@ -2,8 +2,6 @@
 """
 Module:
 	ArmorInterface
-Author:
-	Alice Nardelli alice.nardelli98@gmail.com
 ROS nodes used for menaging with aRMOR. 
 Service :
        /armor_interface server called to menage with aRMOR according to the needs of the client node
