@@ -2,8 +2,6 @@
 """
 Module:
 	AnnounceHypotesis
-Author:
-	Alice Nardelli alice.nardelli98@gmail.com
 ROS nodes used for simulating the robot announcement. Given an hypotesis it announces it simply printing on terminal.
 Service :
 	/announce_service to get the hypotesis to announce
